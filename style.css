@@ -1,0 +1,5 @@
+.main-image img {
+    width: 20px;
+    height: 30px;
+    object-fit: fill;
+}
