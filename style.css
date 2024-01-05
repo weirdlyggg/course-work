@@ -39,3 +39,10 @@
     display: inline;
     margin-left: auto;
 }
+.page-content {
+    padding: 1rem;
+}
+.about-company {
+    display: flex;
+    gap: 20px;
+}
