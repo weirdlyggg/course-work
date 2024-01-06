@@ -7,6 +7,9 @@
 *::after,*::before {
     box-sizing: border-box;
 }
+.main-image {
+    margin-right: 10px;
+}
 .main-image img {
     width: 20px;
     height: 30px;
@@ -45,4 +48,18 @@
 .about-company {
     display: flex;
     gap: 20px;
+}
+.routes-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.route {
+    display: flex;
+    flex-direction: row;
+}
+.route-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
 }
