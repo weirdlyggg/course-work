@@ -16,14 +16,14 @@
                 <img src="main-image.png" alt="main-image">
             </div>
             <div class="name">
-                Пешеходные маршруты Москвы
+                Step by Step Moscow
             </div>
             <nav class="main-menu">
                 <ul>
-                    <li><a href="#about-company">О нас</a></li>
-                    <li><a href="#routes">Маршруты</a></li>
-                    <li><a href="#contacts">Контакты</a></li>
-                    <li><a href="#">Личный кабинет</a></li>
+                    <li><a class="href" href="#about-company">О нас</a></li>
+                    <li><a class="href" href="#routes">Маршруты</a></li>
+                    <li><a class="href" href="#contacts">Контакты</a></li>
+                    <li><a class="href" href="#">Личный кабинет</a></li>
                 </ul>
             </nav>
         </div>        
@@ -36,38 +36,195 @@
                 </div>
                 <div class="inf-about-company">
                     <h1>О нас</h1>
-                    <p>тут написать че то</p>
+                    <p>Добро пожаловать в уникальное путешествие по Москве 
+                        с компанией "Step by Step Moscow". Мы специализируемся 
+                        на организации увлекательных пешеходных экскурсий по самым 
+                        захватывающим местам российской столицы. Наша команда экскурсоводов - 
+                        это профессионалы, готовые поделиться удивительными фактами, легендами 
+                        и историей этого удивительного города.
+                        Мы предлагаем разнообразные маршруты, чтобы удовлетворить 
+                        интересы каждого гостя. От классических маршрутов через Красную 
+                        Площадь и Кремль до неизведанных уголков исторического центра.
+                        Наши пешеходные прогулки - это не просто прогулки, это настоящие 
+                        погружения в культуру, архитектуру и дух Москвы. Мы уделяем особое 
+                        внимание комфорту наших гостей, обеспечивая маленькие группы и 
+                        персонализированный подход.
+                        Не упустите возможность увидеть Москву глазами настоящих 
+                        знатоков и любителей этого города. Присоединяйтесь к 
+                        "Step by Step Moscow" и откройте для себя удивительные тайны 
+                        этого уникального места.тут написать че то</p>
                 </div>
             </div>
-            <div class="container text-center">
+            <div class="container text-center popular-route">
                 <h1>Популярные маршруты</h1>
-                <div class="row">
-                    <div class="col">
-                        Column
+                <div class="row popular-cont">
+                    <div class="col popular">
+                        <div class="popular-img">
+                            <a href="#"><img src="patr-most.jpg" alt="patr-most"></a>
+                        </div>
+                        <div><a class="href" href="#">Знаковые мосты Москвы</a></div>
                     </div>
-                    <div class="col">
-                        Column
+                    <div class="col popular">
+                        <div class="popular-img">
+                            <a href="#"><img src="ulicza-arbat.jpg" alt="ulicza-arbat"></a>
+                        </div>
+                        <div><a class="href" href="#">Арбат - душа Москвы</a></div>
                     </div>
-                    <div class="col">
-                        Column
+                    <div class="col popular">
+                        <div class="popular-img">
+                            <a href="#"><img src="zoo.jpg" alt="zoo"></a>
+                        </div>
+                        <div><a class="href" href="#">Для всё семьи: планетрий, зоопарк и музеи</a></div>
                     </div>
                 </div>
             </div>
             <div class="routes" id="routes">
-                <h1>Пешеходные маршруты по Москве</h1>
-                <div class="routes-content">
-                    <div class="route">
-                        <div class="route-img">
-                            <img src="ne-skychny-sad.jpg" alt="ne-skychny-sad">
-                        </div>
-                        <div class="route-text">
-
-                        </div>
+                <h1 class="text-center">Пешеходные маршруты по Москве</h1>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="ne-skychny-sad.jpg" alt="ne-skychny-sad">
+                    </div>
+                    <div class="route-text">
+                        <h2>Нескучный сад</h2>
+                        <p>Нескучный сад – старейший парк Москвы. 
+                        В середине XVIII века здесь, в своём имении, 
+                        известный московский миллионер Прокопий Демидов построил 
+                        дворец, получивший название «Демидовский». На крутом берегу 
+                        Москвы-реки он устроил насыпные террасы и разбил огромный сад 
+                        с собранием более 2000 видов растений. При следующем владельце, 
+                        графе А. Г. Орлове-Чесменском, на территории усадьбы появился 
+                        целый ряд павильонов, беседок и различных садовых «затей», 
+                        многие из которых сохранились до наших дней. Когда усадьбу купил 
+                        император Николай I, он дал владению название Нескучный сад. Именно 
+                        так называлось имение, принадлежавшее князю Н. Ю. Трубецкому, с 
+                        большим парком, с зелеными лабиринтами, диковинными беседками и оранжереями.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 1490 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="vorobyovy-gory.jpeg" alt="vorobyovy-gory">
+                    </div>
+                    <div class="route-text">
+                        <h2>Воробьевы горы</h2>
+                        <p>Воробьёвы горы - одно из красивейших мест в Москве. 
+                        С высокого берега открывается изумительный вид на столицу, 
+                        а также главное здание МГУ.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 1990 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="ulicza-arbat.jpg" alt="ulicza-arbat">
+                    </div>
+                    <div class="route-text">
+                        <h2>Арбат - душа Москвы</h2>
+                        <p>Станция метро «Арбатская» - ул. Воздвиженка - Арбатская площадь - ул. Арбат - Смоленская-Сенная площадь.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 2490 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="zoo.jpg" alt="zoo">
+                    </div>
+                    <div class="route-text">
+                        <h2>Для всё семьи: планетрий, зоопарк и музеи</h2>
+                        <p>Познавательный маршрут для исследователей живой природы в центре Москвы.Три музея, зоопарк и планетарий.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 1990 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="kyskovo.jpg" alt="kyskovo">
+                    </div>
+                    <div class="route-text">
+                        <h2>Исторический маршрут для всей семьи</h2>
+                        <p>Маршрут начинается со спокойной прогулки по исторической Усадьбе Кусково, из которой предлагается, передвигаясь по синей ветке, добраться до музеев в самом центре Москвы.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 2990 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="patr-most.jpg" alt="patr-most">
+                    </div>
+                    <div class="route-text">
+                        <h2>Знаковые мосты Москвы</h2>
+                        <p>Выбрать один из множества мостов, соединяющих разные районы Москвы. Узнайте историю самых известных и популярных из них.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 2490 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="b-ord.jpg" alt="b-ord">
+                    </div>
+                    <div class="route-text">
+                        <h2>Ахматовские места в Москве</h2>
+                        <p>Прогуляйтесь по Москве поэтессы и посмотрите, как преображается город в ее стихах.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 1990 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="s1200.jpg" alt="s1200">
+                    </div>
+                    <div class="route-text">
+                        <h2>Авторские экскурсионные маршруты «Японцы в Москве»: маршрут первый и второй</h2>
+                        <p>Авторские экскурсионные маршруты «Японцы в Москве», подготовленные гидом-переводчиком, специалистом по истории российско-японских отношений Светланой Михайловой, позволят открыть для себя места в столице, связанные с японской культурой и ее известными представителями.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 1990 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="artplay.jpg" alt="artplay">
+                    </div>
+                    <div class="route-text">
+                        <h2>Авторский маршрут Леднёва А.В. «Остров Сыромятники».</h2>
+                        <p>Между Курской железной дорогой и Яузой лежат земли древней слободы сыромятников. 
+                        В советские годы это был настоящий остров, изолированный от большого города, в 
+                        шаге от привокзальной площади и шумного Садового кольца. Настоящая «terra incognita». 
+                        Сегодня в арт-кластерах, возникших в трех заводских ансамблях Сыромятников, бывают тысячи москвичей 
+                        и гостей города. «Artplay», «Винзавод», «Арма» – популярные места притяжения. 
+                        Современный дизайн этих площадок очень разный, в каждом случае это результат работы известных 
+                        архитекторов по преобразованию исторических производственных ансамблей. </p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 2490 &#8381</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="route">
+                    <div class="route-img">
+                        <img src="sokol.jpg" alt="sokol">
+                    </div>
+                    <div class="route-text">
+                        <h2>Авторский маршрут Королькова А.Ю. «Правда о Соколе»</h2>
+                        <p>Обзорная экскурсия по району Сокол с подробными рассказами о храме Всех Святых во Всехсвятском, кооперативном посёлке «Сокол» и Мемориально-парковом комплексе героев Первой мировой войны. Маршрут разработан и подготовлен Корольковым Андреем Юрьевичем.</p>
+                        <button class="buy-btn">
+                            <span class="shopcart">Выбрать </span><span class="price"> 1490 &#8381</span>
+                        </button>
                     </div>
                 </div>
             </div>
+            <div class="guides">
+
+            </div>
             <div class="contacts" id="contacts">
-                
+                <h1 class="text-center">Контакты</h1>
             </div>
         </div>
     </main>
