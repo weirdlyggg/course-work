@@ -42,47 +42,9 @@
     display: inline;
     margin-left: auto;
 }
-.page-content {
-    padding: 1rem;
-}
 .about-company {
     display: flex;
     gap: 20px;
-    margin: 2rem 0;
-}
-.route {
-    display: flex;
-    gap: 20px;
-    margin: 2rem 0;
-}
-.route-img img{
-    width: 524px;
-    height: 393px;
-    object-fit: fill;
-}
-.popular-img {
-    width: 100%;
-    height: 100%;
-}
-.popular-img img{
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-}
-.popular {
-    display: flex;
-    height: 15rem;
-    width: 25rem;
-    margin: 20px;
-    flex-direction: column;
-}
-.popular-cont {
-    gap: 20px;
-}
-.popular-route {
-    margin: 2rem 0;
-}
-.routes {
     margin: 2rem 0;
 }
 .contacts {
@@ -91,16 +53,4 @@
 .href{
     text-decoration: none;
     color: black;
-}
-.buy-btn {
-    overflow: hidden;
-    cursor:pointer;
-    outline: none;
-    padding: 7px; 
-}
-.shopcart {
-    padding: 0.5rem 0.7rem;
-    display: inline-block;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
