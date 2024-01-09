@@ -7,7 +7,7 @@ const routesUrl = '/api/routes';
 function getData() {
     const xhr = new XMLHttpRequest();
     const url = new URL(routesUrl, mainUrl);
-    url.searchParams('api_key', apiKey);
+    url.searchParams.set('api_key', apiKey);
     xhr.open('get', url);
     xhr.send();
     xhr.onload = function() {
