@@ -5,8 +5,10 @@ const mainUrl = 'http://exam-2023-1-api.std-900.ist.mospolytech.ru';
 const routesUrl = '/api/routes';
 
 function selectRoute(event) {
-    //доделать обработчик
+    alert('hello')
 }
+
+const tbody = document.querySelector('.tbody');
 
 function addTableRow(record) {
     const tr = document.createElement('tr');
@@ -24,7 +26,23 @@ function addTableRow(record) {
     tdBtn.textContent = record.tdBtn;
     tdBtn.addEventListener('click', selectRoute)
     tr.append(tdBtn);
+    
+    tbody.appendChild(tr);
 } 
+
+function getInfo(){
+    const xhr = new XMLHttpRequest();
+    const newUrl = new URL(routesUrl, mainUrl);
+    newUrl.searchParams.set('api_key', apiKey);
+    xhr.open("GET", newUrl);
+    xhr.onload = function() {
+        const records = JSON.parse(xhr.response);
+        for (const record of records) {
+            addTableRow(record);
+        }
+    }
+    xhr.send();
+}
 
 // function getData() {
 //     const xhr = new XMLHttpRequest();
@@ -48,5 +66,5 @@ function addTableRow(record) {
 // }
 
 window.addEventListener('DOMContentLoaded', ()=>{
-    getData();
+    getInfo();
 })
