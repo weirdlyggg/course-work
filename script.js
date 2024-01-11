@@ -30,6 +30,17 @@ function addTableRow(record) {
     tbody.appendChild(tr);
 } 
 
+function splitMainObject(value) {
+    console.log(value.match(/,/g)?.length)
+    if (value.match(/,/g)?.length>=value.match(/\./g)?.length && value.match(/,/g)?.length>value.match(/-/g)?.length) {
+        return value.split(',');
+    }
+    if (value.match(/\./g)?.length>value.match(/-/g)?.length && value.match(/\./g)?.length>=value.match(/,/g)?.length) {
+        return value.split('.');
+    }
+        return value.split('-')
+}
+
 function getInfo(){
     const xhr = new XMLHttpRequest();
     const newUrl = new URL(routesUrl, mainUrl);
@@ -38,11 +49,19 @@ function getInfo(){
     xhr.onload = function() {
         const records = JSON.parse(xhr.response);
         for (const record of records) {
+            const select = document.querySelector('.form-select');
+            for (const elem of splitMainObject(record.mainObject)) {
+                const option = document.createElement('option');
+                option.textContent = elem;
+                select.append(option);
+            };
             addTableRow(record);
         }
     }
     xhr.send();
 }
+
+
 
 // function getData() {
 //     const xhr = new XMLHttpRequest();
