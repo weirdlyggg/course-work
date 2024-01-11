@@ -1,11 +1,51 @@
+'use strict'
 const apiKey = '0da0ef1e-d6fe-4f05-9f38-137f75daa1f8';
 
 const mainUrl = 'http://exam-2023-1-api.std-900.ist.mospolytech.ru';
 
 const routesUrl = '/api/routes';
 
+function guidesId(tr, event) {
+    const forGued = tr.id;
+    const guidesUrl = `/api/routes/${forGued}/guides`;
+    const xhr = new XMLHttpRequest();
+    const newUrl = new URL(guidesUrl, mainUrl);
+    newUrl.searchParams.set('api_key', apiKey);
+    xhr.open("GET", newUrl);
+    xhr.onload = function() {
+        const records = JSON.parse(xhr.response);
+        for (const record of records) {
+            addGuidesTableRow(record);
+        }
+    };
+    xhr.send();
+}
+
+const tbodyGuides = document.querySelector('.tbodyGuides');
+
+function addGuidesTableRow(record) {
+    const tr = document.createElement('tr');
+    tr.id = record.id;
+    const name = document.createElement('td');
+    name.textContent = record.name;
+    tr.append(name);
+    const language = document.createElement('td');
+    language.textContent = record.language;
+    tr.append(language);
+    const workExperience = document.createElement('td');
+    workExperience.textContent = record.workExperience;
+    tr.append(workExperience);
+    const pricePerHour = document.createElement('td');
+    pricePerHour.textContent = record.pricePerHour;
+    tr.append(pricePerHour);
+    const tdBtnGuides = document.createElement('td');
+    tr.append(tdBtnGuides);
+
+    tbodyGuides.appendChild(tr);
+}
+
 function selectRoute(event) {
-    alert('hello')
+    alert('hncbds');
 }
 
 const tbody = document.querySelector('.tbody');
@@ -23,29 +63,19 @@ function addTableRow(record) {
     mainObject.textContent = record.mainObject;
     tr.append(mainObject);
     const tdBtn = document.createElement('td');
-    tdBtn.textContent = record.tdBtn;
-    tdBtn.addEventListener('click', selectRoute)
+    tdBtn.textContent = "Выбрать";
+    tdBtn.addEventListener('click', event => guidesId(tr, event));
     tr.append(tdBtn);
     
     tbody.appendChild(tr);
 } 
 
-function splitMainObject(value) {
-    console.log(value.match(/,/g)?.length)
-    if (value.match(/,/g)?.length>=value.match(/\./g)?.length && value.match(/,/g)?.length>value.match(/-/g)?.length) {
-        return value.split(',');
-    }
-    if (value.match(/\./g)?.length>value.match(/-/g)?.length && value.match(/\./g)?.length>=value.match(/,/g)?.length) {
-        return value.split('.');
-    }
-        return value.split('-')
-}
 
-function getInfo(){
+function getData(){
     const xhr = new XMLHttpRequest();
-    const newUrl = new URL(routesUrl, mainUrl);
-    newUrl.searchParams.set('api_key', apiKey);
-    xhr.open("GET", newUrl);
+    const url = new URL(routesUrl, mainUrl);
+    url.searchParams.set('api_key', apiKey);
+    xhr.open("GET", url);
     xhr.onload = function() {
         const records = JSON.parse(xhr.response);
         for (const record of records) {
@@ -59,6 +89,16 @@ function getInfo(){
         }
     }
     xhr.send();
+}
+
+function splitMainObject(value) {
+    if (value.match(/,/g)?.length>=value.match(/\./g)?.length && value.match(/,/g)?.length>value.match(/-/g)?.length) {
+        return value.split(',');
+    }
+    if (value.match(/\./g)?.length>value.match(/-/g)?.length && value.match(/\./g)?.length>=value.match(/,/g)?.length) {
+        return value.split('.');
+    }
+        return value.split('-')
 }
 
 
@@ -85,5 +125,5 @@ function getInfo(){
 // }
 
 window.addEventListener('DOMContentLoaded', ()=>{
-    getInfo();
+    getData();
 })
