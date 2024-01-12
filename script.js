@@ -39,18 +39,42 @@ function addGuidesTableRow(record) {
     pricePerHour.textContent = record.pricePerHour;
     tr.append(pricePerHour);
     const tdBtnGuides = document.createElement('td');
-    tdBtnGuides.addEventListener('click', event => guidesName(name, event));
+    tdBtnGuides.textContent = "Выбрать";
+    tdBtnGuides.style.backgroundColor = "#bb0218";
+    tdBtnGuides.style.color = "white";
+    tdBtnGuides.style.cursor = "pointer";
+    tdBtnGuides.style.borderRadius = "15px";
     tr.append(tdBtnGuides);
+    tdBtnGuides.addEventListener('click', event => modalWindow(event));
+
     const select = document.querySelector('.guides-select')
     const option = document.createElement('option');
     option.textContent = record.language;
     select.append(option);
+
     tbodyGuides.appendChild(tr);
 }
 
-function selectRoute(event) {
-    alert('hncbds');
+function modalWindow(event) {
+    let modal = document.querySelector('.modal');
+    modal.style.display = 'block';
+
+
 }
+
+let btnCloseModalWindow = document.querySelector('.btn-close')
+btnCloseModalWindow.addEventListener('click', event => closeModalWindow(event));
+
+function closeModalWindow(event) {
+    let modal = document.querySelector('.modal');
+    modal.style.display = 'none';
+}
+
+
+
+// function selectRoute(event) {
+//     alert('hncbds');
+// }
 
 
 
@@ -70,6 +94,8 @@ function addTableRow(record) {
     tr.append(mainObject);
     const tdBtn = document.createElement('td');
     tdBtn.textContent = "Выбрать";
+    tdBtn.style.color = "#bb0218";
+    tdBtn.style.cursor = "pointer";
     tdBtn.addEventListener('click', event => guidesId(tr, event));
     tr.append(tdBtn);
     
