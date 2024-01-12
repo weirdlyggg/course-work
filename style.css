@@ -60,3 +60,9 @@
 .head5 {
     font-weight: bold;
 }
+.footer {
+    padding: 1.25rem 0;
+    font-size: 0.8rem;
+    border-top: 3px solid #bb0218;
+    
+}
