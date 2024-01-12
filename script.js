@@ -39,14 +39,20 @@ function addGuidesTableRow(record) {
     pricePerHour.textContent = record.pricePerHour;
     tr.append(pricePerHour);
     const tdBtnGuides = document.createElement('td');
+    tdBtnGuides.addEventListener('click', event => guidesName(name, event));
     tr.append(tdBtnGuides);
-
+    const select = document.querySelector('.guides-select')
+    const option = document.createElement('option');
+    option.textContent = record.language;
+    select.append(option);
     tbodyGuides.appendChild(tr);
 }
 
 function selectRoute(event) {
     alert('hncbds');
 }
+
+
 
 const tbody = document.querySelector('.tbody');
 
@@ -79,7 +85,7 @@ function getData(){
     xhr.onload = function() {
         const records = JSON.parse(xhr.response);
         for (const record of records) {
-            const select = document.querySelector('.form-select');
+            const select = document.querySelector('.routes-select');
             for (const elem of splitMainObject(record.mainObject)) {
                 const option = document.createElement('option');
                 option.textContent = elem;
