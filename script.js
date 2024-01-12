@@ -40,10 +40,9 @@ function addGuidesTableRow(record) {
     tr.append(pricePerHour);
     const tdBtnGuides = document.createElement('td');
     tdBtnGuides.textContent = "Выбрать";
-    tdBtnGuides.style.backgroundColor = "#bb0218";
-    tdBtnGuides.style.color = "white";
+    tdBtnGuides.style.color = "#bb0218";
+    tdBtnGuides.style.fontWeight = "bold";
     tdBtnGuides.style.cursor = "pointer";
-    tdBtnGuides.style.borderRadius = "15px";
     tr.append(tdBtnGuides);
     tdBtnGuides.addEventListener('click', event => modalWindow(event));
 
@@ -95,6 +94,7 @@ function addTableRow(record) {
     const tdBtn = document.createElement('td');
     tdBtn.textContent = "Выбрать";
     tdBtn.style.color = "#bb0218";
+    tdBtn.style.fontWeight = "bold"
     tdBtn.style.cursor = "pointer";
     tdBtn.addEventListener('click', event => guidesId(tr, event));
     tr.append(tdBtn);
