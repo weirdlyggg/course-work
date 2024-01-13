@@ -70,15 +70,9 @@ function closeModalWindow(event) {
     modal.style.display = 'none';
 }
 
-
-
 // function selectRoute(event) {
 //     alert('hncbds');
 // }
-
-
-
-// 
 
 // function addTableRow(record) {
 //     const tr = document.createElement('tr');
@@ -106,8 +100,8 @@ function closeModalWindow(event) {
 let perPage = 5;
 let currentPage = 1;
 let totalPage = 0;
-const inputNameObjects = document.querySelector('#inputNameObjects');
 
+const inputNameObjects = document.querySelector('#inputNameObjects');
 inputNameObjects.addEventListener('input', (event)=>{
     const value = event.target.value;
     const url = new URL(routesUrl, mainUrl);
@@ -122,7 +116,24 @@ inputNameObjects.addEventListener('input', (event)=>{
             getOrgers();
         };
     };
-})
+});
+
+const selectNameObject = document.querySelector('#selectNameObject');
+selectNameObject.addEventListener('input', (event) => {
+    const value = event.target.value;
+    const url = new URL(routesUrl, mainUrl);
+    url.searchParams.set('api_key', apiKey);
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', url);
+    xhr.send();
+    xhr.onload = function() {
+        const data = JSON.parse(xhr.response);
+        renderOrders(data.filter(item => item.mainObject.includes(value)))
+        if (value == '') {
+            getOrgers();
+        };
+    };
+});
 
 function getOrgers() {
     const url = new URL(routesUrl, mainUrl);
@@ -147,8 +158,6 @@ function getOrgers() {
         };
     };
 }
-
-
 
 function renderOrders(orders) {
     const tbody = document.querySelector('.tbody');
@@ -212,8 +221,6 @@ function renderPagination() {
     };
 }
 
-
-
 function getData(){
     const xhr = new XMLHttpRequest();
     const url = new URL(routesUrl, mainUrl);
@@ -243,8 +250,6 @@ function splitMainObject(value) {
     }
         return value.split('-');
 }
-
-
 
 // function getData() {
 //     const xhr = new XMLHttpRequest();
