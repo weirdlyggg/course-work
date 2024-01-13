@@ -120,13 +120,22 @@ function getOrgers() {
         const end = currentPage * perPage;
         renderOrders(data.slice(start, end));
         renderPagination();
-    }
+        for (const record of data) {
+            const select = document.querySelector('.routes-select');
+            for (const elem of splitMainObject(record.mainObject)) {
+                const option = document.createElement('option');
+                option.textContent = elem;
+                select.append(option);
+            };
+        };
+    };
 }
 
 
 
 function renderOrders(orders) {
     const tbody = document.querySelector('.tbody');
+    const guidesForm = document.querySelector('.guides');
     tbody.innerHTML = '';
     for (const record of orders) {
         const tr = document.createElement('tr');
@@ -146,9 +155,13 @@ function renderOrders(orders) {
         tdBtn.style.fontWeight = "bold"
         tdBtn.style.cursor = "pointer";
         tdBtn.addEventListener('click', event => guidesId(tr, event));
-        tdBtn.addEventListener
+        tdBtn.addEventListener('click', event => {
+            guidesForm.scrollIntoView({
+                block: 'nearest',
+                behavior: 'smooth',
+            });
+        });
         tr.append(tdBtn);
-
         tbody.appendChild(tr);
     }
 
@@ -156,23 +169,32 @@ function renderOrders(orders) {
 
 function renderPagination() {
     const blockPagination = document.querySelector('.pagination');
+    const tableForm = document.querySelector('.routes');
     blockPagination.innerHTML = '';
     for (let i = 1; i <= totalPage; i++) {
         const btn = document.createElement('button');
         btn.textContent = i;
-        if (currentPage === i) {
-            btn.style.backgroundColor = '#bb0218';
-            btn.style.color = 'white';
-        } else {
-            btn.style.backgroundColor = 'none';
-        };
         btn.addEventListener('click', (event) => {
             const target = event.target;
             currentPage = target.textContent;
             getOrgers();
         });
+        btn.addEventListener('click', event => {
+            tableForm.scrollIntoView({
+                block: 'start',
+                behavior: 'smooth',
+            });
+        });
+        btn.addEventListener('click', event => {
+            if (currentPage === i) {
+                btn.style.backgroundColor = '#bb0218';
+                btn.style.color = 'white';
+            } else {
+                btn.style.backgroundColor = 'none';
+            };
+        });
         blockPagination.append(btn);
-    }
+    };
     
 }
 
