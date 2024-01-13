@@ -106,6 +106,23 @@ function closeModalWindow(event) {
 let perPage = 5;
 let currentPage = 1;
 let totalPage = 0;
+const inputNameObjects = document.querySelector('#inputNameObjects');
+
+inputNameObjects.addEventListener('input', (event)=>{
+    const value = event.target.value;
+    const url = new URL(routesUrl, mainUrl);
+    url.searchParams.set('api_key', apiKey);
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', url);
+    xhr.send();
+    xhr.onload = function() {
+        const data = JSON.parse(xhr.response);
+        renderOrders(data.filter(item => item.name.includes(value)))
+        if (value == '') {
+            getOrgers();
+        };
+    };
+})
 
 function getOrgers() {
     const url = new URL(routesUrl, mainUrl);
@@ -174,6 +191,12 @@ function renderPagination() {
     for (let i = 1; i <= totalPage; i++) {
         const btn = document.createElement('button');
         btn.textContent = i;
+        if (currentPage === i) {
+            btn.style.backgroundColor = '#bb0218';
+            btn.style.color = 'white';
+        } else {
+            btn.style.backgroundColor = 'none';
+        };
         btn.addEventListener('click', (event) => {
             const target = event.target;
             currentPage = target.textContent;
@@ -185,38 +208,31 @@ function renderPagination() {
                 behavior: 'smooth',
             });
         });
-        btn.addEventListener('click', event => {
-            if (currentPage === i) {
-                btn.style.backgroundColor = '#bb0218';
-                btn.style.color = 'white';
-            } else {
-                btn.style.backgroundColor = 'none';
-            };
-        });
         blockPagination.append(btn);
     };
-    
 }
 
-// function getData(){
-//     const xhr = new XMLHttpRequest();
-//     const url = new URL(routesUrl, mainUrl);
-//     url.searchParams.set('api_key', apiKey);
-//     xhr.open("GET", url);
-//     xhr.onload = function() {
-//         const records = JSON.parse(xhr.response);
-//         for (const record of records) {
-//             const select = document.querySelector('.routes-select');
-//             for (const elem of splitMainObject(record.mainObject)) {
-//                 const option = document.createElement('option');
-//                 option.textContent = elem;
-//                 select.append(option);
-//             };
-//             addTableRow(record);
-//         }
-//     }
-//     xhr.send();
-// }
+
+
+function getData(){
+    const xhr = new XMLHttpRequest();
+    const url = new URL(routesUrl, mainUrl);
+    url.searchParams.set('api_key', apiKey);
+    xhr.open("GET", url);
+    xhr.onload = function() {
+        const records = JSON.parse(xhr.response);
+        for (const record of records) {
+            const select = document.querySelector('.routes-select');
+            for (const elem of splitMainObject(record.mainObject)) {
+                const option = document.createElement('option');
+                option.textContent = elem;
+                select.append(option);
+            };
+            addTableRow(record);
+        }
+    }
+    xhr.send();
+}
 
 function splitMainObject(value) {
     if (value.match(/,/g)?.length>=value.match(/\./g)?.length && value.match(/,/g)?.length>value.match(/-/g)?.length) {
