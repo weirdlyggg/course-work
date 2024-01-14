@@ -199,13 +199,12 @@ function renderPagination() {
     blockPagination.innerHTML = '';
     for (let i = 1; i <= totalPage; i++) {
         const btn = document.createElement('button');
+        btn.setAttribute('class', 'btnPgn');
+        btn.style.borderWidth = '3px';
+        btn.style.borderColor = '#bb0218';
+        btn.style.borderRadius = '7px';
+        btn.style.margin = '3px';
         btn.textContent = i;
-        if (currentPage === i) {
-            btn.style.backgroundColor = '#bb0218';
-            btn.style.color = 'white';
-        } else {
-            btn.style.backgroundColor = 'none';
-        };
         btn.addEventListener('click', (event) => {
             const target = event.target;
             currentPage = target.textContent;

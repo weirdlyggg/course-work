@@ -66,3 +66,7 @@
     border-top: 3px solid #bb0218;
     
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+}
