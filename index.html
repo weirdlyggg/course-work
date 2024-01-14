@@ -209,7 +209,7 @@
                         <div class="col-3">
                             <div class="pointModalWindow">Время начала:</div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 mt-2">
                             <select class="timeStart" name="timeStart" id="timeStart" aria-label="timeStart">
                                 <option value="9">9:00</option>
                                 <option value="9.30">9:30</option>
@@ -260,15 +260,15 @@
                             <label class="pointModalWindow">Количество человек:</label>
                         </div>
                         <div class="col-6">
-                            <input type="number" min="1" max="20" class="form-control" id="people" placeholder="Количество человек">
+                            <input type="number" min="1" max="20" class="form-control" id="people" placeholder="Количество человек"/>
                         </div>
                     </div>
                     <div>
                         <label class="pointModalWindow">Дополнительные опции:</label>
                     </div>
                     <div class="mb-3 mt-2">
-                            <input type="checkbox" class="checkbox" id="checkbox">
-                            <label for="checkbox" class="optionModalWindow">Выезд гида в течении часа</label>
+                            <input type="checkbox" class="checkbox" id="checkbox1">
+                            <label for="checkbox1" class="optionModalWindow">Выезд гида в течении часа</label>
                             <p>Повышается стоимость на 30%</p>
                     </div>
                     <div class="mb-3 mt-2">
@@ -281,13 +281,12 @@
                         <div class="col">
                             <label class="pointModalWindow">Итоговая стоимость:</label>
                         </div>
-                        <div class="col" id="itogPrice">
-                            
-                        </div>
+                        <label id="itogPrice"></label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary">Расчитать</button>
+                    <button type="button" class="btn btn-dark">Очистить</button>
                     <button type="button" class="btn btn-outline-danger">Отправить</button>
                 </div>
             </div>

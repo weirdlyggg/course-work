@@ -11,9 +11,25 @@ const tbodyGuides = document.querySelector('.tbodyGuides');
 
 let arr = [];
 
+function itogShow(price, valueTimeOfTheExcursion, isThisDayOff, numberOfVisitors, priceTime) {
+    let summa = price * valueTimeOfTheExcursion * isThisDayOff + numberOfVisitors + priceTime;
+    console.log(summa);
+    let summaWithCheckbox1 = 0;
+    const checkbox1 = document.getElementById('checkbox1');
+    const checkbox2 = document.getElementById('checkbox2');
+    if (checkbox1.checked) {
+        summaWithCheckbox1 = summa * 1.3;     
+        const itog = document.getElementById('itogPrice');
+        itog.textContent = summaWithCheckbox1;   
+    } else {
+        const itog = document.getElementById('itogPrice');
+        itog.textContent = summa;
+    };
+    // const hidenPrice = document.getElementById('itogPrice');
+    // hidenPrice.style.display = "block";
+}
+
 function modalWindow(pricePerHour, event) {
-    let modal = document.querySelector('.modal');
-    modal.style.display = 'block';
     const pricePH = pricePerHour.textContent;
     arr.push(pricePH);
     const price = Number(arr[0]);
@@ -21,10 +37,15 @@ function modalWindow(pricePerHour, event) {
     const timeOfTheExcursion = document.getElementById('time-of-the-excursion');
     const valueTimeOfTheExcursion = timeOfTheExcursion.value;
     const peopleCount = Number(document.getElementById('people'));
-    const selectedDay = document.getElementById('davaToday');
-    const valueSelectedDay = selectedDay.textContent;
+    const selectedDay = new Date(document.getElementById('davaToday').value);
+    let isThisDayOff = 0;
+    if (selectedDay === 0 || selectedDay === 6) {
+        isThisDayOff = 1.5;
+    } else {
+        isThisDayOff = 1;
+    };
+    console.log(selectedDay);
     const currentTime = document.getElementById('timeStart');
-    const itog = document.getElementById('itogPrice');
     const valueTime = currentTime.value;
     let numberOfVisitors = 0;
     if (peopleCount >= 1 && peopleCount <= 5) {
@@ -42,9 +63,25 @@ function modalWindow(pricePerHour, event) {
     } else {
         priceTime = 0;
     }
-    let summa = price * valueTimeOfTheExcursion * 10 + numberOfVisitors + priceTime;
-    itog.textContent = summa.textContent;
+    itogShow(price, valueTimeOfTheExcursion, isThisDayOff, numberOfVisitors, priceTime);
 }
+
+document.querySelector('.btn-outline-secondary').addEventListener('click', modalWindow);
+
+document.querySelector('.btn-outline-secondary').addEventListener('click', itogShow);
+
+function clear() {
+    arr.splice(1);
+    document.getElementById('time-of-the-excursion').value = '1';
+    document.getElementById('people').value = '1';
+    document.getElementById('timeStart').value = "9";
+    document.getElementById("checkbox1").checked = false;
+    document.getElementById("checkbox2").checked = false;
+    const hidenPrice = document.getElementById('itogPrice');
+    hidenPrice.textContent = "";
+}
+
+document.querySelector('.btn-dark').addEventListener('click', clear);
 
 function guidesName(name, event) {
     const guidesNameLine = document.getElementById('guidesName');
@@ -74,9 +111,10 @@ function addGuidesTableRow(record) {
     tr.append(tdBtnGuides);
     tdBtnGuides.addEventListener('click', event => guidesName(name, event));
     tdBtnGuides.addEventListener('click', event => modalWindow(pricePerHour, event));
-    // tdBtnGuides.addEventListener('click', event => {
-    
-    // });
+    tdBtnGuides.addEventListener('click', event => {
+        let modal = document.querySelector('.modal');
+        modal.style.display = 'block';
+    });
     const select = document.querySelector('.guides-select');
     const option = document.createElement('option');
     option.textContent = record.language;
@@ -84,8 +122,6 @@ function addGuidesTableRow(record) {
 
     tbodyGuides.appendChild(tr);
 }
-
-document.querySelector('.btn-outline-secondary').addEventListener('click', modalWindow);
 
 const davaToday = document.getElementById('davaToday');
 const currentDate = new Date();
@@ -95,6 +131,7 @@ davaToday.setAttribute('min', minDate);
 function closeModalWindow(event) {
     let modal = document.querySelector('.modal');
     modal.style.display = 'none';
+    arr = [];
 }
 
 let btnCloseModalWindow = document.querySelector('.btn-close');
