@@ -46,7 +46,8 @@ function addGuidesTableRow(record) {
     tdBtnGuides.style.cursor = "pointer";
     tr.append(tdBtnGuides);
     tdBtnGuides.addEventListener('click', event => modalWindow(event));
-
+    tdBtnGuides.addEventListener('click', event => guidesName(name, event));
+    tdBtnGuides.addEventListener('click', event => modalWindow(pricePerHour, event));
     const select = document.querySelector('.guides-select');
     const option = document.createElement('option');
     option.textContent = record.language;
@@ -55,12 +56,20 @@ function addGuidesTableRow(record) {
     tbodyGuides.appendChild(tr);
 }
 
-function modalWindow(event) {
+
+
+function modalWindow(pricePerHour, event) {
     let modal = document.querySelector('.modal');
     modal.style.display = 'block';
-
+    const pricePH = pricePerHour.textContent;
+    console.log(pricePH);
 
 }
+
+const davaToday = document.getElementById('davaToday');
+const currentDate = new Date();
+const minDate = currentDate.toISOString().split('T')[0];
+davaToday.setAttribute('min', minDate);
 
 let btnCloseModalWindow = document.querySelector('.btn-close')
 btnCloseModalWindow.addEventListener('click', event => closeModalWindow(event));
@@ -70,9 +79,15 @@ function closeModalWindow(event) {
     modal.style.display = 'none';
 }
 
-// function selectRoute(event) {
-//     alert('hncbds');
-// }
+function routeName(name, event) {
+    const routeNameLine = document.getElementById('routeName');
+    routeNameLine.textContent = name.textContent;
+}
+
+function guidesName(name, event) {
+    const guidesNameLine = document.getElementById('guidesName');
+    guidesNameLine.textContent = name.textContent;
+}
 
 // function addTableRow(record) {
 //     const tr = document.createElement('tr');
@@ -181,6 +196,7 @@ function renderOrders(orders) {
         tdBtn.style.fontWeight = "bold"
         tdBtn.style.cursor = "pointer";
         tdBtn.addEventListener('click', event => guidesId(tr, event));
+        tdBtn.addEventListener('click', event => routeName(name, event));
         tdBtn.addEventListener('click', event => {
             guidesForm.scrollIntoView({
                 block: 'nearest',
