@@ -70,3 +70,13 @@
     display: flex;
     justify-content: center;
 }
+.optionModalWindow{
+    color: #bb0218;
+}
+.pointModalWindow{
+    font-weight: bold;
+}
+.modal-title{
+    color: #bb0218;
+    font-weight: bold;
+}

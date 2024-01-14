@@ -183,23 +183,23 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-3">
-                            <label >ФИО гида:</label>
+                            <label class="pointModalWindow">ФИО гида:</label>
                         </div>
-                        <div class="col-3" id="guidesName">
+                        <div class="col-6" id="guidesName">
 
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-3">
-                            <label >Название маршрута:</label>
+                            <label class="pointModalWindow">Название маршрута:</label>
                         </div>
-                        <div class="col-3" id="routeName">
+                        <div class="col-6 mt-2" id="routeName">
 
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-3">
-                            <label>Дата:</label>
+                            <label class="pointModalWindow">Дата:</label>
                         </div>
                         <div class="col-9">
                             <input type="date" name="Date" id="davaToday" aria-label="date">
@@ -207,9 +207,47 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-3">
-                            <label for="date">Длительность экскурсии:</label>
+                            <div class="pointModalWindow">Время начала:</div>
                         </div>
-                        <div class="col-9">
+                        <div class="col-3">
+                            <select class="timeStart" name="timeStart" id="timeStart" aria-label="timeStart">
+                                <option value="9">9:00</option>
+                                <option value="9.30">9:30</option>
+                                <option value="10">10:00</option>
+                                <option value="10.30">10:30</option>
+                                <option value="11">11:00</option>
+                                <option value="11.30">11:30</option>
+                                <option value="12">12:00</option>
+                                <option value="12.30">12:30</option>
+                                <option value="13">13:00</option>
+                                <option value="13.30">13:30</option>
+                                <option value="14">14:00</option>
+                                <option value="14.30">14:30</option>
+                                <option value="15">15:00</option>
+                                <option value="15.30">15:30</option>
+                                <option value="16">16:00</option>
+                                <option value="16.30">16:30</option>
+                                <option value="17">17:00</option>
+                                <option value="17.30">17:30</option>
+                                <option value="18">18:00</option>
+                                <option value="18.30">18:30</option>
+                                <option value="19">19:00</option>
+                                <option value="19.30">19:30</option>
+                                <option value="20">20:00</option>
+                                <option value="20.30">20:30</option>
+                                <option value="21">21:00</option>
+                                <option value="21.30">21:30</option>
+                                <option value="22">22:00</option>
+                                <option value="22.30">22:30</option>
+                                <option value="23">23:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <label for="date" class="pointModalWindow">Длительность экскурсии:</label>
+                        </div>
+                        <div class="col-9 mt-3">
                             <select class="time-of-the-excursion" name="time-of-the-excursion" id="time-of-the-excursion" aria-label="time-of-the-excursion" required>
                                 <option value="1" selected disabled>1 час</option>
                                 <option value="2">2 часа</option>
@@ -217,9 +255,39 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <label class="pointModalWindow">Количество человек:</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="number" min="1" max="20" class="form-control" id="people" placeholder="Количество человек">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="pointModalWindow">Дополнительные опции:</label>
+                    </div>
+                    <div class="mb-3 mt-2">
+                            <input type="checkbox" class="checkbox" id="checkbox">
+                            <label for="checkbox" class="optionModalWindow">Выезд гида в течении часа</label>
+                            <p>Повышается стоимость на 30%</p>
+                    </div>
+                    <div class="mb-3 mt-2">
+                            <input type="checkbox" class="checkbox" id="checkbox2">
+                            <label for="checkbox2" class="optionModalWindow">Трансфер до метро</label>
+                            <p>Увеличивает стоимость на
+                                25% в выходные дни и на 30% в будние</p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="pointModalWindow">Итоговая стоимость:</label>
+                        </div>
+                        <div class="col" id="itogPrice">
+                            
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                    <button type="button" class="btn btn-outline-secondary">Расчитать</button>
                     <button type="button" class="btn btn-outline-danger">Отправить</button>
                 </div>
             </div>

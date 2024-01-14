@@ -1,4 +1,5 @@
-'use strict'
+/* eslint-disable max-len */
+'use strict';
 
 const apiKey = '0da0ef1e-d6fe-4f05-9f38-137f75daa1f8';
 
@@ -6,23 +7,49 @@ const mainUrl = 'http://exam-2023-1-api.std-900.ist.mospolytech.ru';
 
 const routesUrl = '/api/routes';
 
-function guidesId(tr, event) {
-    const forGued = tr.id;
-    const guidesUrl = `/api/routes/${forGued}/guides`;
-    const xhr = new XMLHttpRequest();
-    const newUrl = new URL(guidesUrl, mainUrl);
-    newUrl.searchParams.set('api_key', apiKey);
-    xhr.open("GET", newUrl);
-    xhr.onload = function() {
-        const records = JSON.parse(xhr.response);
-        for (const record of records) {
-            addGuidesTableRow(record);
-        }
+const tbodyGuides = document.querySelector('.tbodyGuides');
+
+let arr = [];
+
+function modalWindow(pricePerHour, event) {
+    let modal = document.querySelector('.modal');
+    modal.style.display = 'block';
+    const pricePH = pricePerHour.textContent;
+    arr.push(pricePH);
+    const price = Number(arr[0]);
+    console.log(arr);
+    const timeOfTheExcursion = document.getElementById('time-of-the-excursion');
+    const valueTimeOfTheExcursion = timeOfTheExcursion.value;
+    const peopleCount = Number(document.getElementById('people'));
+    const selectedDay = document.getElementById('davaToday');
+    const valueSelectedDay = selectedDay.textContent;
+    const currentTime = document.getElementById('timeStart');
+    const itog = document.getElementById('itogPrice');
+    const valueTime = currentTime.value;
+    let numberOfVisitors = 0;
+    if (peopleCount >= 1 && peopleCount <= 5) {
+        numberOfVisitors = 0;
+    } else if (peopleCount > 5 && peopleCount <= 10) {
+        numberOfVisitors = 1000;
+    } else {
+        numberOfVisitors = 1500;
     };
-    xhr.send();
+    let priceTime = 0;
+    if (valueTime >= 9 && valueTime <= 12) {
+        priceTime = 400;
+    } else if (valueTime >= 20 && valueTime <= 23) {
+        priceTime = 1000;  
+    } else {
+        priceTime = 0;
+    }
+    let summa = price * valueTimeOfTheExcursion * 10 + numberOfVisitors + priceTime;
+    itog.textContent = summa.textContent;
 }
 
-const tbodyGuides = document.querySelector('.tbodyGuides');
+function guidesName(name, event) {
+    const guidesNameLine = document.getElementById('guidesName');
+    guidesNameLine.textContent = name.textContent;
+}
 
 function addGuidesTableRow(record) {
     const tr = document.createElement('tr');
@@ -45,9 +72,11 @@ function addGuidesTableRow(record) {
     tdBtnGuides.style.fontWeight = "bold";
     tdBtnGuides.style.cursor = "pointer";
     tr.append(tdBtnGuides);
-    tdBtnGuides.addEventListener('click', event => modalWindow(event));
     tdBtnGuides.addEventListener('click', event => guidesName(name, event));
     tdBtnGuides.addEventListener('click', event => modalWindow(pricePerHour, event));
+    // tdBtnGuides.addEventListener('click', event => {
+    
+    // });
     const select = document.querySelector('.guides-select');
     const option = document.createElement('option');
     option.textContent = record.language;
@@ -56,37 +85,24 @@ function addGuidesTableRow(record) {
     tbodyGuides.appendChild(tr);
 }
 
-
-
-function modalWindow(pricePerHour, event) {
-    let modal = document.querySelector('.modal');
-    modal.style.display = 'block';
-    const pricePH = pricePerHour.textContent;
-    console.log(pricePH);
-
-}
+document.querySelector('.btn-outline-secondary').addEventListener('click', modalWindow);
 
 const davaToday = document.getElementById('davaToday');
 const currentDate = new Date();
 const minDate = currentDate.toISOString().split('T')[0];
 davaToday.setAttribute('min', minDate);
 
-let btnCloseModalWindow = document.querySelector('.btn-close')
-btnCloseModalWindow.addEventListener('click', event => closeModalWindow(event));
-
 function closeModalWindow(event) {
     let modal = document.querySelector('.modal');
     modal.style.display = 'none';
 }
 
+let btnCloseModalWindow = document.querySelector('.btn-close');
+btnCloseModalWindow.addEventListener('click', event => closeModalWindow(event));
+
 function routeName(name, event) {
     const routeNameLine = document.getElementById('routeName');
     routeNameLine.textContent = name.textContent;
-}
-
-function guidesName(name, event) {
-    const guidesNameLine = document.getElementById('guidesName');
-    guidesNameLine.textContent = name.textContent;
 }
 
 // function addTableRow(record) {
@@ -112,66 +128,20 @@ function guidesName(name, event) {
 //     tbody.appendChild(tr);
 // } 
 
-let perPage = 5;
-let currentPage = 1;
-let totalPage = 0;
-
-const inputNameObjects = document.querySelector('#inputNameObjects');
-inputNameObjects.addEventListener('input', (event)=>{
-    const value = event.target.value;
-    const url = new URL(routesUrl, mainUrl);
-    url.searchParams.set('api_key', apiKey);
-    let xhr = new XMLHttpRequest();
-    xhr.open('get', url);
-    xhr.send();
+function guidesId(tr, event) {
+    const forGued = tr.id;
+    const guidesUrl = `/api/routes/${forGued}/guides`;
+    const xhr = new XMLHttpRequest();
+    const newUrl = new URL(guidesUrl, mainUrl);
+    newUrl.searchParams.set('api_key', apiKey);
+    xhr.open("GET", newUrl);
     xhr.onload = function() {
-        const data = JSON.parse(xhr.response);
-        renderOrders(data.filter(item => item.name.includes(value)))
-        if (value == '') {
-            getOrgers();
-        };
+        const records = JSON.parse(xhr.response);
+        for (const record of records) {
+            addGuidesTableRow(record);
+        }
     };
-});
-
-const selectNameObject = document.querySelector('#selectNameObject');
-selectNameObject.addEventListener('input', (event) => {
-    const value = event.target.value;
-    const url = new URL(routesUrl, mainUrl);
-    url.searchParams.set('api_key', apiKey);
-    let xhr = new XMLHttpRequest();
-    xhr.open('get', url);
     xhr.send();
-    xhr.onload = function() {
-        const data = JSON.parse(xhr.response);
-        renderOrders(data.filter(item => item.mainObject.includes(value)))
-        if (value == '') {
-            getOrgers();
-        };
-    };
-});
-
-function getOrgers() {
-    const url = new URL(routesUrl, mainUrl);
-    url.searchParams.set('api_key', apiKey);
-    let xhr = new XMLHttpRequest();
-    xhr.open('get', url);
-    xhr.send();
-    xhr.onload = function() {
-        const data = JSON.parse(xhr.response);
-        totalPage = Math.ceil(data.length / perPage);
-        const start = currentPage * perPage - perPage;
-        const end = currentPage * perPage;
-        renderOrders(data.slice(start, end));
-        renderPagination();
-        for (const record of data) {
-            const select = document.querySelector('.routes-select');
-            for (const elem of splitMainObject(record.mainObject)) {
-                const option = document.createElement('option');
-                option.textContent = elem;
-                select.append(option);
-            };
-        };
-    };
 }
 
 function renderOrders(orders) {
@@ -193,7 +163,7 @@ function renderOrders(orders) {
         const tdBtn = document.createElement('td');
         tdBtn.textContent = "Выбрать";
         tdBtn.style.color = "#bb0218";
-        tdBtn.style.fontWeight = "bold"
+        tdBtn.style.fontWeight = "bold";
         tdBtn.style.cursor = "pointer";
         tdBtn.addEventListener('click', event => guidesId(tr, event));
         tdBtn.addEventListener('click', event => routeName(name, event));
@@ -208,6 +178,25 @@ function renderOrders(orders) {
     }
 
 }
+
+function splitMainObject(value) {
+    var commaCount = value.match(/,/g) ? value.match(/,/g).length : 0;
+    var dotCount = value.match(/\./g) ? value.match(/\./g).length : 0;
+    var dashCount = value.match(/-/g) ? value.match(/-/g).length : 0;
+    
+    if (commaCount >= dotCount && commaCount > dashCount) {
+        return value.split(',');
+    }
+    if (dotCount > dashCount && dotCount >= commaCount) {
+        return value.split('.');
+    }
+    
+    return value.split('-');
+}
+
+let perPage = 5;
+let currentPage = 1;
+let totalPage = 0;
 
 function renderPagination() {
     const blockPagination = document.querySelector('.pagination');
@@ -236,7 +225,65 @@ function renderPagination() {
     };
 }
 
-function getData(){
+function getOrgers() {
+    const url = new URL(routesUrl, mainUrl);
+    url.searchParams.set('api_key', apiKey);
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', url);
+    xhr.send();
+    xhr.onload = function() {
+        const data = JSON.parse(xhr.response);
+        totalPage = Math.ceil(data.length / perPage);
+        const start = currentPage * perPage - perPage;
+        const end = currentPage * perPage;
+        renderOrders(data.slice(start, end));
+        renderPagination();
+        for (const record of data) {
+            const select = document.querySelector('.routes-select');
+            for (const elem of splitMainObject(record.mainObject)) {
+                const option = document.createElement('option');
+                option.textContent = elem;
+                select.append(option);
+            };
+        };
+    };
+}
+
+const selectNameObject = document.querySelector('#selectNameObject');
+selectNameObject.addEventListener('input', (event) => {
+    const value = event.target.value;
+    const url = new URL(routesUrl, mainUrl);
+    url.searchParams.set('api_key', apiKey);
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', url);
+    xhr.send();
+    xhr.onload = function() {
+        const data = JSON.parse(xhr.response);
+        renderOrders(data.filter(item => item.mainObject.includes(value)));
+        if (value == '') {
+            getOrgers();
+        };
+    };
+});
+
+const inputNameObjects = document.querySelector('#inputNameObjects');
+inputNameObjects.addEventListener('input', (event)=>{
+    const value = event.target.value;
+    const url = new URL(routesUrl, mainUrl);
+    url.searchParams.set('api_key', apiKey);
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', url);
+    xhr.send();
+    xhr.onload = function() {
+        const data = JSON.parse(xhr.response);
+        renderOrders(data.filter(item => item.name.includes(value)));
+        if (value == '') {
+            getOrgers();
+        };
+    };
+});
+
+function getData() {
     const xhr = new XMLHttpRequest();
     const url = new URL(routesUrl, mainUrl);
     url.searchParams.set('api_key', apiKey);
@@ -252,18 +299,8 @@ function getData(){
             };
             addTableRow(record);
         }
-    }
+    };
     xhr.send();
-}
-
-function splitMainObject(value) {
-    if (value.match(/,/g)?.length>=value.match(/\./g)?.length && value.match(/,/g)?.length>value.match(/-/g)?.length) {
-        return value.split(',');
-    }
-    if (value.match(/\./g)?.length>value.match(/-/g)?.length && value.match(/\./g)?.length>=value.match(/,/g)?.length) {
-        return value.split('.');
-    }
-        return value.split('-');
 }
 
 // function getData() {
@@ -289,4 +326,4 @@ function splitMainObject(value) {
 
 window.addEventListener('DOMContentLoaded', ()=>{
     getOrgers();
-})
+});
