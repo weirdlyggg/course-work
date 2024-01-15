@@ -84,7 +84,19 @@ function modalWindow(pricePerHour, event) {
     } else {
         const itog = document.getElementById('itogPrice');
         itog.textContent = summa;
-    }
+    };
+    let summaWithCheckbox1And2 = 0;
+    if (checkbox1.checked && checkbox2.checked) {
+        let weekend = 0;
+        if (selectedDay === 0 || selectedDay === 6) {
+            weekend = 1.25;
+        } else {
+            weekend = 1.3;
+        };
+        summaWithCheckbox1And2 = summa * weekend * 1.3;     
+        const itog = document.getElementById('itogPrice');
+        itog.textContent = summaWithCheckbox1And2;
+    };
     // const itog = document.getElementById('itogPrice');
     // itog.textContent = summa;
 }
@@ -228,7 +240,7 @@ function renderOrders(orders) {
         tdBtn.addEventListener('click', event => routeName(name, event));
         tdBtn.addEventListener('click', event => {
             guidesForm.scrollIntoView({
-                block: 'nearest',
+                block: 'center',
                 behavior: 'smooth',
             });
         });
