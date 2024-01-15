@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable no-use-before-define */
 'use strict';
 
 const apiKey = '0da0ef1e-d6fe-4f05-9f38-137f75daa1f8';
@@ -45,8 +46,10 @@ function modalWindow(pricePerHour, event) {
         numberOfVisitors = 0;
     } else if (peopleCount > 5 && peopleCount <= 10) {
         numberOfVisitors = 1000;
-    } else {
+    } else if (peopleCount > 10 && peopleCount <= 20) {
         numberOfVisitors = 1500;
+    } else {
+        numberOfVisitors = 0;
     };
     let priceTime = 0;
     if (valueTime >= 9 && valueTime <= 12) {
@@ -67,6 +70,21 @@ function modalWindow(pricePerHour, event) {
         const itog = document.getElementById('itogPrice');
         itog.textContent = summa;
     };
+    let summaWithCheckbox2 = 0;
+    if (checkbox2.checked) {
+        let weekend = 0;
+        if (selectedDay === 0 || selectedDay === 6) {
+            weekend = 1.25;
+        } else {
+            weekend = 1.3;
+        };
+        summaWithCheckbox2 = summa * weekend;     
+        const itog = document.getElementById('itogPrice');
+        itog.textContent = summaWithCheckbox2;
+    } else {
+        const itog = document.getElementById('itogPrice');
+        itog.textContent = summa;
+    }
     // const itog = document.getElementById('itogPrice');
     // itog.textContent = summa;
 }
