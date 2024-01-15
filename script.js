@@ -11,23 +11,16 @@ const tbodyGuides = document.querySelector('.tbodyGuides');
 
 let arr = [];
 
-function itogShow(price, valueTimeOfTheExcursion, isThisDayOff, numberOfVisitors, priceTime) {
-    let summa = price * valueTimeOfTheExcursion * isThisDayOff + numberOfVisitors + priceTime;
-    console.log(summa);
-    let summaWithCheckbox1 = 0;
-    const checkbox1 = document.getElementById('checkbox1');
-    const checkbox2 = document.getElementById('checkbox2');
-    if (checkbox1.checked) {
-        summaWithCheckbox1 = summa * 1.3;     
-        const itog = document.getElementById('itogPrice');
-        itog.textContent = summaWithCheckbox1;   
-    } else {
-        const itog = document.getElementById('itogPrice');
-        itog.textContent = summa;
-    };
-    // const hidenPrice = document.getElementById('itogPrice');
-    // hidenPrice.style.display = "block";
-}
+// function itogShow(price, valueTimeOfTheExcursion, isThisDayOff, numberOfVisitors, priceTime) {
+    
+//     // let summaWithCheckbox1 = 0;
+//     // const checkbox1 = document.getElementById('checkbox1');
+//     // const checkbox2 = document.getElementById('checkbox2');
+
+//     // const hidenPrice = document.getElementById('itogPrice');
+//     // hidenPrice.style.display = "block";
+    
+// }
 
 function modalWindow(pricePerHour, event) {
     const pricePH = pricePerHour.textContent;
@@ -36,7 +29,7 @@ function modalWindow(pricePerHour, event) {
     console.log(arr);
     const timeOfTheExcursion = document.getElementById('time-of-the-excursion');
     const valueTimeOfTheExcursion = timeOfTheExcursion.value;
-    const peopleCount = Number(document.getElementById('people'));
+    const peopleCount = Number(document.getElementById('people').value);
     const selectedDay = new Date(document.getElementById('davaToday').value);
     let isThisDayOff = 0;
     if (selectedDay === 0 || selectedDay === 6) {
@@ -63,22 +56,33 @@ function modalWindow(pricePerHour, event) {
     } else {
         priceTime = 0;
     }
-    itogShow(price, valueTimeOfTheExcursion, isThisDayOff, numberOfVisitors, priceTime);
+    let summa = price * valueTimeOfTheExcursion * isThisDayOff + numberOfVisitors + priceTime;
+    console.log(summa);
+    let summaWithCheckbox1 = 0
+    if (checkbox1.checked) {
+        summaWithCheckbox1 = summa * 1.3;     
+        const itog = document.getElementById('itogPrice');
+        itog.textContent = summaWithCheckbox1;   
+    } else {
+        const itog = document.getElementById('itogPrice');
+        itog.textContent = summa;
+    };
+    // const itog = document.getElementById('itogPrice');
+    // itog.textContent = summa;
 }
 
 document.querySelector('.btn-outline-secondary').addEventListener('click', modalWindow);
-
-document.querySelector('.btn-outline-secondary').addEventListener('click', itogShow);
 
 function clear() {
     arr.splice(1);
     document.getElementById('time-of-the-excursion').value = '1';
     document.getElementById('people').value = '1';
     document.getElementById('timeStart').value = "9";
+    document.getElementById('davaToday').value = new Date().toISOString().split("T")[0];
     document.getElementById("checkbox1").checked = false;
     document.getElementById("checkbox2").checked = false;
-    const hidenPrice = document.getElementById('itogPrice');
-    hidenPrice.textContent = "";
+    const itog = document.getElementById('itogPrice');
+    itog.textContent = '';
 }
 
 document.querySelector('.btn-dark').addEventListener('click', clear);
